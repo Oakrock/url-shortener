@@ -1,8 +1,9 @@
-package work.kickstand.urlshortener
+package work.kickstand.urlshortener.router
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.server.router
+import work.kickstand.urlshortener.handler.UrlShortenerHandler
 
 @Configuration
 class UrlShortenerRouter {

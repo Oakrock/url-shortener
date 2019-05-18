@@ -1,4 +1,4 @@
-package work.kickstand.urlshortener
+package work.kickstand.urlshortener.handler
 
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -20,7 +20,7 @@ class UrlShortenerHandler(val repo: MongoDbRepository) {
 
     fun redirect(request: ServerRequest) = repo.findById(request.pathVariable("shortUrl"))
                                                 .switchIfEmpty(Mono.just(defaultUrl))
-                                                .map(::redirectToUrl).flatMap{it}
+                                                .map(Companion::redirectToUrl).flatMap{it}
 
 
     companion object {

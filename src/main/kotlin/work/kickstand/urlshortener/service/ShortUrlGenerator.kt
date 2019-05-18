@@ -1,4 +1,4 @@
-package work.kickstand.urlshortener
+package work.kickstand.urlshortener.service
 
 import java.lang.StringBuilder
 import java.util.*
