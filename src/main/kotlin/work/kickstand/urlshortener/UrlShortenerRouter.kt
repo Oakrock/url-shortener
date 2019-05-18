@@ -11,7 +11,6 @@ class UrlShortenerRouter {
 
     @Bean
     fun router(handler: UrlShortenerHandler) = router {
-            GET("/", handler::helloWorld)
-            GET("/{test}") { request -> ServerResponse.ok().body(BodyInserters.fromObject(request.pathVariable("test"))) }
+            GET("/{info}", handler::helloWorld)
         }
 }
