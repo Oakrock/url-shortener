@@ -8,12 +8,10 @@ class ShortUrlGenerator {
 
     companion object {
 
-        fun generateShortUrl() : String {
-            return this.longToRandomString(UUID.randomUUID().leastSignificantBits)
-        }
+        fun generateShortUrl() = longToRandomString(UUID.randomUUID().leastSignificantBits)
 
         private fun longToRandomString(randomNum: Long) : String {
-            var absLong = randomNum.rem(urlValueRange).plus(minUrlValue)
+            var absLong = Math.abs(randomNum).rem(urlValueRange).plus(minUrlValue)
 
             val shortUrl = StringBuilder()
 
