@@ -22,7 +22,6 @@ class UrlShortenerHandler(val repo: MongoDbRepository) {
                                                 .switchIfEmpty(Mono.just(defaultUrl))
                                                 .map(Companion::redirectToUrl).flatMap{it}
 
-
     companion object {
 
         val defaultUrl = ShortUrl("default", "https://www.kickstand.work")
