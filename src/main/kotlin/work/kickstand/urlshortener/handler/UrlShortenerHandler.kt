@@ -6,21 +6,20 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 import work.kickstand.urlshortener.model.ShortUrl
-import work.kickstand.urlshortener.repository.MongoDbRepository
-import work.kickstand.urlshortener.service.ShortUrlGenerator
+import work.kickstand.urlshortener.service.UrlShortenerService
 import java.net.URI
 
 @Component
-class UrlShortenerHandler(val repo: MongoDbRepository) {
+class UrlShortenerHandler(val service: UrlShortenerService) {
 
     fun createShortUrl(request: ServerRequest) : Mono<ServerResponse> {
-        ShortUrlGenerator.generateShortUrl()
+        ServerResponse.created(URI("getcall for shorturl")).body(service.createShortUrl("testing"), ShortUrl::class.java)
         return ServerResponse.ok().build()
     }
 
-    fun redirect(request: ServerRequest) = repo.findById(request.pathVariable("shortUrl"))
-                                                .switchIfEmpty(Mono.just(defaultUrl))
-                                                .map(Companion::redirectToUrl).flatMap{it}
+    fun redirect(request: ServerRequest) = service.getShortUrl(request.pathVariable("shortUrl"))
+                                                    .switchIfEmpty(Mono.just(defaultUrl))
+                                                    .map(Companion::redirectToUrl).flatMap{it}
 
     companion object {
 
