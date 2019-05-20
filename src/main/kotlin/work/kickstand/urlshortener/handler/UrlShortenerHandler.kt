@@ -13,8 +13,11 @@ import java.net.URI
 class UrlShortenerHandler(val service: UrlShortenerService) {
 
     fun createShortUrl(request: ServerRequest) : Mono<ServerResponse> {
-        ServerResponse.created(URI("getcall for shorturl")).body(service.createShortUrl("testing"), ShortUrl::class.java)
-        return ServerResponse.ok().build()
+
+        val shortUrl = service.createShortUrl(request.bodyToMono(ShortUrl::class.java)
+                        .map{it.url})
+
+        return ServerResponse.created(URI.create("")).body(shortUrl, ShortUrl::class.java)
     }
 
     fun redirect(request: ServerRequest) = service.getShortUrl(request.pathVariable("shortUrl"))

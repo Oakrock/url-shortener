@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("software.amazon.awssdk:dynamodb:2.5.46")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")

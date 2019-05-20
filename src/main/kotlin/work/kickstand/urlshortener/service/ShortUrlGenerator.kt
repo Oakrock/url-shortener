@@ -4,9 +4,7 @@ import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.pow
 
-class ShortUrlGenerator {
-
-    companion object {
+object ShortUrlGenerator {
 
         fun generateShortUrl() = longToRandomString(UUID.randomUUID().leastSignificantBits)
 
@@ -28,5 +26,4 @@ class ShortUrlGenerator {
         private val minUrlValue = urlCharSet.size.toDouble().pow(2).toInt()
         private val maxUrlValue = urlCharSet.size.minus(1).times(urlCharSet.size.toDouble().pow(6).toInt())
         private val urlValueRange = maxUrlValue - minUrlValue
-    }
 }
